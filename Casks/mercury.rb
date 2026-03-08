@@ -1,6 +1,6 @@
 cask "mercury" do
-  version "0.2.0"
-  sha256 "14146a20afb5fefabe1bc1a3f9cf87cb75f71af0a61761f3ed9e8abc68ac0b76"
+  version "0.2.1"
+  sha256 "207d9fb970bf2bc41f35a9c0faab77a42f0b737f028033c88d21d352628b18f6"
 
   url "https://github.com/uhojin/mercury/releases/download/v#{version}/Mercury-#{version}.dmg"
   name "Mercury"
