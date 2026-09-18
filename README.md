@@ -13,13 +13,16 @@ brew tap uhojin/tap
 | Cask | Description |
 |------|-------------|
 | `mercury` | Tiny macOS temperature monitor for your menu bar |
+| `syrinx` | Native macOS soundboard that routes into your voice calls |
 
 ```
 brew install --cask mercury
+brew install --cask syrinx
 ```
 
 Or install directly without tapping first:
 
 ```
 brew install --cask uhojin/tap/mercury
+brew install --cask uhojin/tap/syrinx
 ```

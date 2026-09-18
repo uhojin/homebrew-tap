@@ -13,20 +13,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update mercury cask
+      - name: Update cask
         env:
+          # Mercury's release.yml predates the "cask" field, so it
+          # doesn't send one — default to mercury for compatibility.
+          CASK: ${{ github.event.client_payload.cask || 'mercury' }}
           NEW_VERSION: ${{ github.event.client_payload.version }}
           NEW_SHA256: ${{ github.event.client_payload.sha256 }}
         run: |
-          sed -i "s/version \".*\"/version \"${NEW_VERSION}\"/" Casks/mercury.rb
-          sed -i "s/sha256 \".*\"/sha256 \"${NEW_SHA256}\"/" Casks/mercury.rb
+          sed -i "s/version \".*\"/version \"${NEW_VERSION}\"/" "Casks/${CASK}.rb"
+          sed -i "s/sha256 \".*\"/sha256 \"${NEW_SHA256}\"/" "Casks/${CASK}.rb"
 
       - name: Commit and push
         env:
+          CASK: ${{ github.event.client_payload.cask || 'mercury' }}
           NEW_VERSION: ${{ github.event.client_payload.version }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Casks/mercury.rb
-          git commit -m "Update mercury to ${NEW_VERSION}"
+          git add "Casks/${CASK}.rb"
+          git commit -m "Update ${CASK} to ${NEW_VERSION}"
           git push
+
